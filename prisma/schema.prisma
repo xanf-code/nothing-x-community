@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model nothing_products {
+  id        Int      @default(autoincrement())
+  productName String @id @unique
+  resource_entries resource_entries[]
+}
+
+model resource_type {
+  id   Int    @default(autoincrement())
+  name String @id @unique
+  entries resource_entries[]
+}
+
+model resource_entries {
+  id           Int       @id @default(autoincrement())
+  productName  String
+  firstName    String
+  lastName     String
+  emailID      String    @default("NA")
+  resourceName String
+  resourceLink String
+  resourceType String
+  approved     DateTime? 
+  upVotes      Int       @default(0)
+  downVotes    Int       @default(0)
+  clicks       Int       @default(0)
+  score        Int       @default(0)
+  status       String    @default("DRAFT")
+  resource_type resource_type @relation(fields: [resourceType], references: [name])
+  nothing_products nothing_products @relation(fields: [productName], references: [productName])
+}
