@@ -17,14 +17,26 @@ function SubmitForm() {
   const [selectedOption, setSelectedOption] = useState("URL");
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const schema = z.object({
+  const commonSchema = z.object({
     firstName: z.string().min(2).max(20),
     lastName: z.string().min(2).max(20),
     emailID: z.string().email(),
     productName: z.string(),
     resourceName: z.string().min(5).max(30),
     resourceType: z.string(),
-    resourceLink: z.string().min(1),
+  });
+
+  const urlSchema = commonSchema.extend({
+    resourceLink: z
+      .string()
+      .min(1)
+      .refine(
+        (value) => selectedOption === "URL" || value === "",
+        "Link is required."
+      ),
+  });
+
+  const fileSchema = commonSchema.extend({
     resourceFile: z
       .any()
       .refine((files) => files?.length == 1, "File is required.")
@@ -38,12 +50,14 @@ function SubmitForm() {
       ),
   });
 
+  const selectedSchema = selectedOption === "URL" ? urlSchema : fileSchema;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(schema) });
+  } = useForm({ resolver: zodResolver(selectedSchema) });
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -162,7 +176,7 @@ function SubmitForm() {
             <input
               type="file"
               {...register("resourceFile")}
-              name="File"
+              name="resourceFile"
               onChange={handleFileChange}
             />
           </>
