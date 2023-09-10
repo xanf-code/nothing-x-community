@@ -52,7 +52,6 @@ function SubmitForm() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-    console.log(selectedFile);
   };
 
   const submitData = async (formBody) => {
