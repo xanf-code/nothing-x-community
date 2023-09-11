@@ -20,7 +20,7 @@ export const resourceTypes = {
   ACCESSORIES: "ACCESSORIES",
 };
 
-export const MAX_FILE_SIZE = 500000;
+export const MAX_FILE_SIZE = 10485760;
 export const ACCEPTED_FILE_TYPES = [
   "image/jpeg",
   "image/jpg",

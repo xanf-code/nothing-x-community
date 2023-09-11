@@ -70,12 +70,10 @@ function SubmitForm() {
 
   const submitData = async (formBody) => {
     try {
-      console.log(selectedOption);
       setIsSubmittingForm(true);
-
       try {
-        if (selectedOption === "File" && selectedFile) {
-          const link = await getLinkForResource(selectedFile);
+        if (selectedOption === "File" && selectedFile != null) {
+          const link = await getLinkForResource(selectedFile, formBody);
           formBody.resourceLink = link;
         }
       } catch (err) {
