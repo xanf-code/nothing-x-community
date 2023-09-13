@@ -103,27 +103,45 @@ function SubmitForm() {
 
   return (
     <div>
-      <form className="flex flex-col" onSubmit={handleSubmit(submitData)}>
-        <label>First Name:</label>
-        <input type="text" {...register("firstName")} />
+      <form
+        className="flex flex-col text-white p-6 rounded-lg"
+        onSubmit={handleSubmit(submitData)}
+      >
+        <label className="text-lg">First Name:</label>
+        <input
+          type="text"
+          {...register("firstName")}
+          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+        />
         {errors.firstName && (
           <span className="text-red-500">{errors.firstName.message}</span>
         )}
 
-        <label>Last Name:</label>
-        <input type="text" {...register("lastName")} />
+        <label className="text-lg">Last Name:</label>
+        <input
+          type="text"
+          {...register("lastName")}
+          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+        />
         {errors.lastName && (
           <span className="text-red-500">{errors.lastName.message}</span>
         )}
 
-        <label>Email ID:</label>
-        <input type="text" {...register("emailID")} />
+        <label className="text-lg">Email ID:</label>
+        <input
+          type="text"
+          {...register("emailID")}
+          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+        />
         {errors.emailID && (
           <span className="text-red-500">{errors.emailID.message}</span>
         )}
 
-        <label>Product Name:</label>
-        <select {...register("productName")}>
+        <label className="text-lg">Product Name:</label>
+        <select
+          {...register("productName")}
+          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+        >
           {Object.keys(products).map((productKey) => (
             <option key={productKey} value={products[productKey]}>
               {products[productKey]}
@@ -134,14 +152,21 @@ function SubmitForm() {
           <span className="text-red-500">{errors.productName.message}</span>
         )}
 
-        <label>Resource Name:</label>
-        <input type="text" {...register("resourceName")} />
+        <label className="text-lg">Resource Name:</label>
+        <input
+          type="text"
+          {...register("resourceName")}
+          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+        />
         {errors.resourceName && (
           <span className="text-red-500">{errors.resourceName.message}</span>
         )}
 
-        <label>Resource Type:</label>
-        <select {...register("resourceType")}>
+        <label className="text-lg">Resource Type:</label>
+        <select
+          {...register("resourceType")}
+          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+        >
           {Object.keys(resourceTypes).map((resourceKey) => (
             <option key={resourceKey} value={resourceTypes[resourceKey]}>
               {resourceTypes[resourceKey]}
@@ -152,16 +177,24 @@ function SubmitForm() {
           <span className="text-red-500">{errors.resourceType.message}</span>
         )}
 
-        <label>What are you uploading?</label>
-        <select onChange={handleOptionChange} value={selectedOption}>
+        <label className="text-lg">What are you uploading?</label>
+        <select
+          onChange={handleOptionChange}
+          value={selectedOption}
+          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+        >
           <option value="URL">URL</option>
           <option value="File">File</option>
         </select>
 
         {selectedOption === "URL" ? (
           <>
-            <label>Resource Link:</label>
-            <input type="text" {...register("resourceLink")} />
+            <label className="text-lg">Resource Link:</label>
+            <input
+              type="text"
+              {...register("resourceLink")}
+              className="text-white px-3 py-2 rounded-md mt-1"
+            />
             {errors.resourceLink && (
               <span className="text-red-500">
                 {errors.resourceLink.message}
@@ -170,12 +203,13 @@ function SubmitForm() {
           </>
         ) : (
           <>
-            <label>Resource File:</label>
+            <label className="text-lg">Resource File:</label>
             <input
               type="file"
               {...register("resourceFile")}
               name="resourceFile"
               onChange={handleFileChange}
+              className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
             />
           </>
         )}
@@ -184,6 +218,7 @@ function SubmitForm() {
           type="submit"
           disabled={isSubmittingForm}
           value={isSubmittingForm ? "Submitting..." : "Submit"}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg mt-4"
         />
       </form>
     </div>
