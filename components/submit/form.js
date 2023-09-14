@@ -104,14 +104,14 @@ function SubmitForm() {
   return (
     <div>
       <form
-        className="flex flex-col text-white p-6 rounded-lg"
+        className="flex flex-col p-6 rounded-lg space-y-2"
         onSubmit={handleSubmit(submitData)}
       >
         <label className="text-lg">First Name:</label>
         <input
           type="text"
           {...register("firstName")}
-          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+          className="font-nothing px-3 py-2 rounded-md mt-1 outline-dotted"
         />
         {errors.firstName && (
           <span className="text-red-500">{errors.firstName.message}</span>
@@ -121,7 +121,7 @@ function SubmitForm() {
         <input
           type="text"
           {...register("lastName")}
-          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+          className="font-nothing  px-3 py-2 rounded-md mt-1 outline-dotted"
         />
         {errors.lastName && (
           <span className="text-red-500">{errors.lastName.message}</span>
@@ -131,7 +131,7 @@ function SubmitForm() {
         <input
           type="text"
           {...register("emailID")}
-          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+          className="font-nothing outline-dotted px-3 py-2 rounded-md mt-1"
         />
         {errors.emailID && (
           <span className="text-red-500">{errors.emailID.message}</span>
@@ -140,7 +140,7 @@ function SubmitForm() {
         <label className="text-lg">Product Name:</label>
         <select
           {...register("productName")}
-          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+          className="font-nothing outline-dotted px-3 py-2 rounded-md mt-1"
         >
           {Object.keys(products).map((productKey) => (
             <option key={productKey} value={products[productKey]}>
@@ -156,7 +156,7 @@ function SubmitForm() {
         <input
           type="text"
           {...register("resourceName")}
-          className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+          className="outline-dotted font-nothing px-3 py-2 rounded-md mt-1"
         />
         {errors.resourceName && (
           <span className="text-red-500">{errors.resourceName.message}</span>
@@ -165,7 +165,7 @@ function SubmitForm() {
         <label className="text-lg">Resource Type:</label>
         <select
           {...register("resourceType")}
-          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+          className="outline-dotted font-nothing px-3 py-2 rounded-md mt-1"
         >
           {Object.keys(resourceTypes).map((resourceKey) => (
             <option key={resourceKey} value={resourceTypes[resourceKey]}>
@@ -181,7 +181,7 @@ function SubmitForm() {
         <select
           onChange={handleOptionChange}
           value={selectedOption}
-          className="font-medium text-black px-3 py-2 rounded-md mt-1"
+          className="outline-dotted font-nothing px-3 py-2 rounded-md mt-1"
         >
           <option value="URL">URL</option>
           <option value="File">File</option>
@@ -193,7 +193,7 @@ function SubmitForm() {
             <input
               type="text"
               {...register("resourceLink")}
-              className="text-white px-3 py-2 rounded-md mt-1"
+              className="outline-dotted font-nothing px-3 py-2 rounded-md mt-1"
             />
             {errors.resourceLink && (
               <span className="text-red-500">
@@ -209,7 +209,7 @@ function SubmitForm() {
               {...register("resourceFile")}
               name="resourceFile"
               onChange={handleFileChange}
-              className="bg-gray-900 text-white px-3 py-2 rounded-md mt-1"
+              className="px-3 py-2 rounded-md mt-1"
             />
           </>
         )}
@@ -218,7 +218,7 @@ function SubmitForm() {
           type="submit"
           disabled={isSubmittingForm}
           value={isSubmittingForm ? "Submitting..." : "Submit"}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg mt-4"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md cursor-cell"
         />
       </form>
     </div>

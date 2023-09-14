@@ -17,7 +17,7 @@ async function PhoneOne() {
           Nothing Phone (1)
         </h2>
       </div>
-      <hr className="w-full border-1 border-gray-700 my-2"></hr>
+      <hr className="w-full border-1 border-gray-700 my-2" />
       {publishedResources.map((resource, index) => (
         <Resource key={index} resource={resource} />
       ))}
