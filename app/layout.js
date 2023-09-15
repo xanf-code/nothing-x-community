@@ -1,6 +1,6 @@
+import Header from "@/components/header/Header";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/header/Header";
 
 export const metadata = {
   title: "Create Next App",
