@@ -6,7 +6,9 @@ import Resource from "./Resource";
 async function PhoneOne() {
   const publishedResources = await getResourcesByProduct(
     products.PHONE_1,
-    resourceStatus.PUBLISHED
+    resourceStatus.PUBLISHED,
+    0,
+    4
   );
 
   return (
