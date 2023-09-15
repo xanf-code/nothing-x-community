@@ -10,7 +10,7 @@ async function PhoneOne() {
   );
 
   return (
-    <>
+    <div>
       <div className="flex space-x-2 items-center">
         <span>🔥📱</span>
         <h2 className="tracking-wide text-lg font-nothing">
@@ -21,7 +21,7 @@ async function PhoneOne() {
       {publishedResources.map((resource, index) => (
         <Resource key={index} resource={resource} />
       ))}
-    </>
+    </div>
   );
 }
 
