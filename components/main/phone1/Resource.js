@@ -29,13 +29,12 @@ function Resource({ resource }) {
   }
 
   async function postAction(id, action) {
-    const response = await axios.put(`/api/action?id=${id}&action=${action}`);
+    const response = await axios.post(`/api/action?id=${id}&action=${action}`);
     if (response.status === 200) {
-      const updatedVote = await computeLikes(id);
       toast({
         description: "Vote submitted 👍🔥",
       });
-      setlikes(updatedVote);
+      setlikes(await computeLikes(id));
     } else if (response.status === 401) {
       toast({
         description: "Something went wrong 🛑",
