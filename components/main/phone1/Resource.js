@@ -30,9 +30,9 @@ function Resource({ resource }) {
 
   async function postAction(id, action) {
     if(action == "up"){
-      setlikes(likes++);
+      setlikes(likes+1);
     } else if(action == "down"){
-      setlikes(likes--);
+      setlikes(likes-1);
     }
     const response = await axios.post(`/api/action?id=${id}&action=${action}`);
     if (response.status === 200) {
