@@ -1,6 +1,7 @@
 import HeaderComp from "@/components/header/HeaderComp";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
           <div className="w-full m-auto max-w-3xl p-6 space-y-4">
             {children}
           </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

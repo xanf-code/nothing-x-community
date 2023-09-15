@@ -34,7 +34,7 @@ const HeaderComp = () => {
                     <Link
                       key={i}
                       href={route.href}
-                      className="block px-2 py-1 text-lg"
+                      className="block px-2 py-1 text-lg font-nothing"
                     >
                       {route.label}
                     </Link>
@@ -49,7 +49,7 @@ const HeaderComp = () => {
                 <Link
                   key={i}
                   href={route.href}
-                  className="text-sm font-medium transition-colors"
+                  className="text-sm font-nothing transition-colors"
                 >
                   {route.label}
                 </Link>

@@ -2,7 +2,6 @@
 
 import { computeLikes, createClick } from "@/app/_actions";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { timeAgo } from "@/lib/utils";
 import { ClockIcon, LapTimerIcon } from "@radix-ui/react-icons";
 import Avatar from "boring-avatars";
@@ -10,8 +9,11 @@ import Link from "next/link";
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 function Resource({ resource }) {
+  const { toast } = useToast();
+
   const upVotes = Number(resource.upVotes);
   const downVotes = Number(resource.downVotes);
 
@@ -31,9 +33,13 @@ function Resource({ resource }) {
     if (response.status === 200) {
       const updatedVote = await computeLikes(id);
       setlikes(updatedVote);
-      console.log("Request was successful.");
+      toast({
+        description: "Vote submitted 👍🔥",
+      });
     } else if (response.status === 401) {
-      console.error("Request Unsuccessful.");
+      toast({
+        description: "Something went wrong 🛑",
+      });
     }
   }
 
@@ -45,7 +51,7 @@ function Resource({ resource }) {
             className="cursor-pointer select-none"
             onClick={() => postAction(resource.id, "up")}
           >
-            <ArrowUpIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <ArrowUpIcon className="h-6 w-6 text-green-500" />
           </div>
           <p className="items-center flex text-sm font-nothing py-1 select-none">
             {likes}
@@ -54,13 +60,13 @@ function Resource({ resource }) {
             className="cursor-pointer select-none"
             onClick={() => postAction(resource.id, "down")}
           >
-            <ArrowDownIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <ArrowDownIcon className="h-6 w-6 rotate-0 text-red-500" />
           </div>
         </div>
         <div className="space-y-3 flex-1">
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-2.5">
             <Avatar size={20} name={fullName} variant="beam" square={false} />
-            <p className="text-xs font-light select-none">{fullName}</p>
+            <p className="text-xs select-none font-nothing">{fullName}</p>
           </div>
           <Link target="_blank" key={resource.id} href={resource.resourceLink}>
             <p
