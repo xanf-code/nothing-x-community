@@ -29,7 +29,17 @@ function Resource({ resource }) {
   }
 
   async function postAction(id, action) {
-    setlikes(likes+1);
+    if(action == "up"){
+      setlikes(likes+1);
+    }
+    else if(action == "down"){
+      setlikes(likes-1);
+    }
+    else{
+      toast({
+        description: "Invalid action.",
+      });
+    }
     const response = await axios.post(`/api/action?id=${id}&action=${action}`);
     if (response.status === 200) {
       toast({
