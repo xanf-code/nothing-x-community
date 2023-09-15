@@ -104,7 +104,7 @@ function SubmitForm() {
   return (
     <div>
       <form
-        className="flex flex-col p-6 rounded-lg space-y-2"
+        className="flex flex-col px-4 rounded-lg space-y-2"
         onSubmit={handleSubmit(submitData)}
       >
         <label className="text-lg">First Name:</label>

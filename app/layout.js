@@ -1,6 +1,6 @@
-import HeaderComp from "@/components/header/header";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/header/Header";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,10 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex justify-center min-h-screen">
+      <body className="flex flex-col justify-center min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <HeaderComp />
-          <div className="w-full max-w-[45rem] p-8 space-y-4">{children}</div>
+          <Header />
+          <div className="w-full m-auto max-w-3xl p-6 space-y-4">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
