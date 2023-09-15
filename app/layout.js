@@ -1,4 +1,4 @@
-import Header from "@/components/header/Header";
+import HeaderComp from "@/components/header/HeaderComp";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="flex flex-col justify-center min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
+          <HeaderComp />
           <div className="w-full m-auto max-w-3xl p-6 space-y-4">
             {children}
           </div>

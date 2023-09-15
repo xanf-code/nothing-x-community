@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MoonIcon, SunIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 
-const Header = () => {
+const HeaderComp = () => {
   const { theme, setTheme } = useTheme();
   const routes = [
     {
@@ -75,4 +75,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderComp;
