@@ -1,4 +1,4 @@
-import { submitResources } from "@/lib/submit/submit";
+import { submitResources } from "@/lib/resources";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {

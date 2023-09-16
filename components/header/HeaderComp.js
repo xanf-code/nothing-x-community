@@ -43,7 +43,7 @@ const HeaderComp = () => {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="sm:flex w-full items-center sm:justify-between">
             <nav className="mx-6 space-x-4 lg:space-x-6 hidden md:block">
               {routes.map((route, i) => (
                 <Link
@@ -55,12 +55,11 @@ const HeaderComp = () => {
                 </Link>
               ))}
             </nav>
-            <div>
+            <div className="flex justify-end">
               <Button
                 variant="ghost"
                 size="icon"
                 aria-label="Toggle Theme"
-                className="mr-6"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
                 <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

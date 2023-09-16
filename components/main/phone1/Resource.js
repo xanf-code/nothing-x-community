@@ -3,11 +3,11 @@
 import { computeLikes, createClick } from "@/app/_actions";
 import { Badge } from "@/components/ui/badge";
 import { timeAgo } from "@/lib/utils";
-import { ClockIcon, LapTimerIcon } from "@radix-ui/react-icons";
+import { ClockIcon } from "@radix-ui/react-icons";
 import Avatar from "boring-avatars";
 import Link from "next/link";
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
-import axios from "axios";
+import wretch from "wretch";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -24,33 +24,34 @@ function Resource({ resource }) {
   const fullName = resource.firstName + " " + resource.lastName;
 
   async function actionClick() {
-    console.log("Resource ID", resource.id);
     await createClick(resource.id);
   }
 
   async function postAction(id, action) {
-    if(action == "up"){
-      setlikes(likes+1);
-    }
-    else if(action == "down"){
-      setlikes(likes-1);
-    }
-    else{
+    if (action == "up") {
+      setlikes(likes + 1);
+    } else if (action == "down") {
+      setlikes(likes - 1);
+    } else {
       toast({
         description: "Invalid action.",
       });
     }
-    const response = await axios.post(`/api/action?id=${id}&action=${action}`);
-    if (response.status === 200) {
-      toast({
-        description: "Vote submitted 👍🔥",
+    wretch(`/api/action?id=${id}&action=${action}`)
+      .post()
+      .res((response) => {
+        if (response.status === 200) {
+          toast({
+            description: "Vote submitted 👍🔥",
+          });
+          setlikes(computeLikes(id));
+        } else if (response.status === 401) {
+          toast({
+            description: "Something went wrong 🛑",
+            variant: "destructive",
+          });
+        }
       });
-      setlikes(await computeLikes(id));
-    } else if (response.status === 401) {
-      toast({
-        description: "Something went wrong 🛑",
-      });
-    }
   }
 
   return (

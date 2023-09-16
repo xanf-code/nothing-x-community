@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import wretch from "wretch";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 import {
   ACCEPTED_FILE_TYPES,
@@ -11,18 +12,20 @@ import {
   resourceTypes,
 } from "@/utils/constants";
 import { getLinkForResource } from "@/lib/submit/submit";
+import { headers } from "@/next.config";
 
 function SubmitForm() {
   const [isSubmittingForm, setIsSubmittingForm] = useState(false);
   const [selectedOption, setSelectedOption] = useState("URL");
   const [selectedFile, setSelectedFile] = useState(null);
+  const { toast } = useToast();
 
   const commonSchema = z.object({
     firstName: z.string().min(2).max(20),
     lastName: z.string().min(2).max(20),
     emailID: z.string().email(),
     productName: z.string(),
-    resourceName: z.string().min(5).max(30),
+    resourceName: z.string().min(5).max(150),
     resourceType: z.string(),
   });
 
@@ -77,25 +80,35 @@ function SubmitForm() {
           formBody.resourceLink = link;
         }
       } catch (err) {
-        console.log("Error is File URL selection", err);
+        toast({
+          description: "File URL selection Error 🛑",
+          variant: "destructive",
+        });
       } finally {
         delete formBody.resourceFile;
       }
 
-      const response = await axios.post("/api/resources", formBody, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.status === 200) {
-        console.log("Request was successful.");
-      } else if (response.status === 401) {
-        console.error("Request Unsuccessful.");
-      }
-      reset();
+      await wretch("/api/resources")
+        .headers({ "Content-Type": "application/json" })
+        .post(formBody)
+        .res((response) => {
+          if (response.status === 200) {
+            toast({
+              description: "Resource submitted 👍🔥",
+            });
+            reset();
+          } else if (response.status === 401) {
+            toast({
+              description: "Something went wrong 🛑",
+              variant: "destructive",
+            });
+          }
+        });
     } catch (error) {
-      console.error("Server Error", error);
+      toast({
+        description: "Server Error 🛑",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmittingForm(false);
     }
