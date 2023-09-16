@@ -43,7 +43,7 @@ export default async function page({ searchParams }) {
             </h2>
           </div>
         </div>
-        <Separator className="mb-2 mt-2" />
+        <Separator className="my-2" />
         <div className="space-x-4 justify-between flex my-6">
           <Select>
             <SelectTrigger className="w-[180px] shadow-none font-nothing">

@@ -2,11 +2,15 @@
 
 import { getLatestLikes, createClick } from "@/app/_actions";
 import { Badge } from "@/components/ui/badge";
-import { timeAgo } from "@/lib/utils";
-import { ClockIcon, EyeOpenIcon } from "@radix-ui/react-icons";
+import { formatNumberToShort, timeAgo } from "@/lib/utils";
 import Avatar from "boring-avatars";
 import Link from "next/link";
-import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
+import {
+  ArrowUpIcon,
+  ArrowDownIcon,
+  ClockIcon,
+  EyeOpenIcon,
+} from "@radix-ui/react-icons";
 import wretch from "wretch";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
@@ -69,7 +73,9 @@ function Resource({ resource }) {
             </div>
             <div className="flex space-x-1.5 items-center mr-2">
               <EyeOpenIcon className="h-3.5 w-3.5" />
-              <p className="font-nothing text-xs">{resource.clicks}</p>
+              <p className="font-nothing text-xs">
+                {formatNumberToShort(resource.clicks)}
+              </p>
             </div>
           </div>
           <Link target="_blank" key={resource.id} href={resource.resourceLink}>
@@ -84,7 +90,7 @@ function Resource({ resource }) {
             <Badge className={"select-none"} variant="secondary">
               {resource.resourceType}
             </Badge>
-            <div className="flex items-center space-x-1 select-none">
+            <div className="flex items-center space-x-1 select-none pr-2">
               <ClockIcon className="h-3.5 w-3.5" />
               <p className="text-xs font-light">{timeAgo(timestamp)}</p>
             </div>

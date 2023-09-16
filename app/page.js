@@ -13,8 +13,8 @@ export default function Home() {
           <RocketIcon className="h-4 w-4" />
           <AlertTitle>Heads up! This is a Beta Release Version 0.1</AlertTitle>
           <AlertDescription>
-            Welcome, we're continuously improving our website. Some features may
-            not be stable.
+            We're continuously improving our website. Some features may not be
+            stable.
           </AlertDescription>
         </Alert>
       </div>

@@ -1,7 +1,11 @@
 import { Separator } from "@/components/ui/separator";
+import { getPublishedResources } from "@/lib/resources";
 import React from "react";
+import Resource from "../products/Resource";
+import Image from "next/image";
 
-function TrendComp() {
+async function TrendComp() {
+  const publishedResources = await getPublishedResources();
   return (
     <>
       <div className="flex space-x-2 items-center">
@@ -9,9 +13,12 @@ function TrendComp() {
         <h2 className="tracking-wide text-lg font-nothing">
           Trending Resources
         </h2>
+        <Image src={"/hot2x.webp"} height={11} width={30} />
       </div>
-      <Separator className="my-2" />
-      <div>{/* WORK TODO - GET ALL TRENDING ITEMS. */}</div>
+      <Separator className="my-3" />
+      {publishedResources.map((resource, index) => (
+        <Resource key={index} resource={resource} />
+      ))}
     </>
   );
 }

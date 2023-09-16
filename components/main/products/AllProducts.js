@@ -1,5 +1,5 @@
 import { getResourcesByProduct } from "@/lib/resources";
-import { products, resourceStatus } from "@/utils/constants";
+import { resourceStatus } from "@/utils/constants";
 import React from "react";
 import Resource from "./Resource";
 import Link from "next/link";
@@ -55,12 +55,12 @@ async function AllProducts({ pkey }) {
             },
           }}
         >
-          <p className="text-sm hover:underline hover:underline-offset-1 text-blue-600">
-            all 👉
+          <p className="text-sm hover:underline hover:underline-offset-2 text-blue-600">
+            see more... 👉
           </p>
         </Link>
       </div>
-      <Separator className="mb-4 mt-2" />
+      <Separator className="my-3" />
       {publishedResources.map((resource, index) => (
         <Resource key={index} resource={resource} />
       ))}
