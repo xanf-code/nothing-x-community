@@ -3,6 +3,7 @@ import { products, resourceStatus } from "@/utils/constants";
 import React from "react";
 import Resource from "./Resource";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 async function AllProducts({ pkey }) {
   const publishedResources = await getResourcesByProduct(
@@ -11,7 +12,8 @@ async function AllProducts({ pkey }) {
     1,
     3,
     "",
-    ""
+    "",
+    "approved"
   );
 
   let title;
@@ -38,7 +40,7 @@ async function AllProducts({ pkey }) {
 
   return (
     <div className="mt-4">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="flex space-x-2 items-center">
           <span>🔥📱</span>
           <h2 className="tracking-wide text-lg font-nothing">{title}</h2>
@@ -49,13 +51,16 @@ async function AllProducts({ pkey }) {
             query: {
               product: pkey,
               page: 1,
+              order: "approved",
             },
           }}
         >
-          <p>View all</p>{" "}
+          <p className="text-sm hover:underline hover:underline-offset-1 text-blue-600">
+            all 👉
+          </p>
         </Link>
       </div>
-      <hr className="w-full border-1 border-gray-700 mb-4 mt-2" />
+      <Separator className="mb-4 mt-2" />
       {publishedResources.map((resource, index) => (
         <Resource key={index} resource={resource} />
       ))}

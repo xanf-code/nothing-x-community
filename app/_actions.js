@@ -2,28 +2,20 @@
 
 import {
   addClicksToPublishedResource,
-  addDownVoteToPublishedResource,
-  addUpVoteToPublishedResource,
-  getDownvotes,
+  addVoteToPublishedResource,
   getUpvotes,
 } from "@/lib/resources";
 
-export async function computeLikes(resourceID) {
+export async function getLatestLikes(resourceID) {
   const ups = await getUpvotes(resourceID);
-  const downs = await getDownvotes(resourceID);
-  return Number(ups + downs);
+  return Number(ups);
 }
 
 export async function createClick(resourceID) {
   await addClicksToPublishedResource(resourceID);
 }
 
-export async function createLike(resourceID) {
-  await addUpVoteToPublishedResource(resourceID);
-  await computeLikes(resourceID);
-}
-
-export async function createDislike(resourceID) {
-  await addDownVoteToPublishedResource(resourceID);
-  await computeLikes(resourceID);
+export async function createVote(resourceID, action) {
+  await addVoteToPublishedResource(resourceID, action);
+  await getLatestLikes(resourceID);
 }

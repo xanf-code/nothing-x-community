@@ -10,3 +10,7 @@ export async function POST(req) {
     return new NextResponse("Submission Error", { status: 401 });
   }
 }
+
+export const config = {
+  runtime: "experimental-edge",
+};

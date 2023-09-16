@@ -1,4 +1,4 @@
-import { createDislike, createLike } from "@/app/_actions";
+import { createVote } from "@/app/_actions";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -7,10 +7,8 @@ export async function POST(req) {
     const resourceID = searchParams.get("id");
     const action = searchParams.get("action");
 
-    if (action == "up") {
-      await createLike(Number(resourceID));
-    } else if (action == "down") {
-      await createDislike(Number(resourceID));
+    if (action) {
+      await createVote(Number(resourceID), action);
     } else {
       console.log("INVALID ACTION.");
     }
@@ -20,3 +18,7 @@ export async function POST(req) {
     return new NextResponse("Something went wrong", { status: 401 });
   }
 }
+
+export const config = {
+  runtime: "experimental-edge",
+};

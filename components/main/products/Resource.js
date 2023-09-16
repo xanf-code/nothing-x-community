@@ -1,25 +1,21 @@
 "use client";
 
-import { computeLikes, createClick } from "@/app/_actions";
+import { getLatestLikes, createClick } from "@/app/_actions";
 import { Badge } from "@/components/ui/badge";
 import { timeAgo } from "@/lib/utils";
-import { ClockIcon } from "@radix-ui/react-icons";
+import { ClockIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import Avatar from "boring-avatars";
 import Link from "next/link";
 import { ArrowUpIcon, ArrowDownIcon } from "@radix-ui/react-icons";
 import wretch from "wretch";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { SelectSeparator } from "@/components/ui/select";
 
 function Resource({ resource }) {
   const { toast } = useToast();
-
   const upVotes = Number(resource.upVotes);
-  const downVotes = Number(resource.downVotes);
-
-  const finalCount = upVotes + downVotes;
-
-  const [likes, setlikes] = useState(finalCount);
+  const [likes, setlikes] = useState(upVotes);
   const timestamp = new Date(resource.approved).getTime();
   const fullName = resource.firstName + " " + resource.lastName;
 
@@ -28,15 +24,6 @@ function Resource({ resource }) {
   }
 
   async function postAction(id, action) {
-    if (action == "up") {
-      setlikes(likes + 1);
-    } else if (action == "down") {
-      setlikes(likes - 1);
-    } else {
-      toast({
-        description: "Invalid action.",
-      });
-    }
     wretch(`/api/action?id=${id}&action=${action}`)
       .post()
       .res((response) => {
@@ -44,7 +31,7 @@ function Resource({ resource }) {
           toast({
             description: "Vote submitted 👍🔥",
           });
-          setlikes(computeLikes(id));
+          setlikes(getLatestLikes(id));
         } else if (response.status === 401) {
           toast({
             description: "Something went wrong 🛑",
@@ -75,9 +62,15 @@ function Resource({ resource }) {
           </div>
         </div>
         <div className="space-y-3 flex-1">
-          <div className="flex items-center space-x-2.5">
-            <Avatar size={20} name={fullName} variant="beam" square={false} />
-            <p className="text-xs select-none font-nothing">{fullName}</p>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2.5">
+              <Avatar size={20} name={fullName} variant="beam" square={false} />
+              <p className="text-xs select-none font-nothing">{fullName}</p>
+            </div>
+            <div className="flex space-x-1.5 items-center mr-2">
+              <EyeOpenIcon className="h-3.5 w-3.5" />
+              <p className="font-nothing text-xs">{resource.clicks}</p>
+            </div>
           </div>
           <Link target="_blank" key={resource.id} href={resource.resourceLink}>
             <p
@@ -98,7 +91,7 @@ function Resource({ resource }) {
           </div>
         </div>
       </div>
-      <hr className="w-full my-4" />
+      <SelectSeparator className="my-4" />
     </>
   );
 }
