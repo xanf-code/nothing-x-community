@@ -1,8 +1,9 @@
-import PhoneOne from "@/components/main/phone1/PhoneOne";
 import TrendComp from "@/components/main/trending/trend";
 import { RocketIcon } from "@radix-ui/react-icons";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { products } from "@/utils/constants";
+import AllProducts from "@/components/main/products/AllProducts";
 
 export default function Home() {
   return (
@@ -18,7 +19,9 @@ export default function Home() {
         </Alert>
       </div>
       <TrendComp />
-      <PhoneOne />
+      {Object.keys(products).map((productKey) => (
+        <AllProducts pkey={products[productKey]} />
+      ))}
     </div>
   );
 }
