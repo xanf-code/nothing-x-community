@@ -18,7 +18,3 @@ export async function POST(req) {
     return new NextResponse("Something went wrong", { status: 401 });
   }
 }
-
-export const config = {
-  runtime: "experimental-edge",
-};
