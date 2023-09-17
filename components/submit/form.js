@@ -12,7 +12,6 @@ import {
   resourceTypes,
 } from "@/utils/constants";
 import { getLinkForResource } from "@/lib/submit/submit";
-import { headers } from "@/next.config";
 
 function SubmitForm() {
   const [isSubmittingForm, setIsSubmittingForm] = useState(false);

@@ -50,7 +50,7 @@ export default function ResourceDrop() {
       <select
         onChange={handleSelectChange}
         value={searchParams.get("type") || "All"}
-        className="p-1 rounded-md"
+        className="p-1 rounded-md bg-white dark:bg-gray-900"
       >
         <option value="All">🦴 All</option>
         {Object.keys(resourceTypes).map((resourceKey) => (

@@ -96,7 +96,7 @@ function Resource({ resource }) {
           </div>
         </div>
       </div>
-      <SelectSeparator className="my-4" />
+      <SelectSeparator className="my-4 last:hidden" />
     </>
   );
 }

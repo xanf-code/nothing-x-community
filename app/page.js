@@ -18,11 +18,10 @@ export default function Home() {
           </AlertDescription>
         </Alert>
       </div>
+
       <TrendComp />
       {Object.keys(products).map((productKey) => (
-        <div>
-          <AllProducts pkey={products[productKey]} />
-        </div>
+        <AllProducts pkey={products[productKey]} />
       ))}
     </div>
   );

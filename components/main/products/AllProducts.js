@@ -39,7 +39,7 @@ async function AllProducts({ pkey }) {
   }
 
   return (
-    <div className="mt-4">
+    <div className="mt-12">
       <div className="flex justify-between items-center">
         <div className="flex space-x-2 items-center">
           <h2 className="tracking-wide text-lg font-nothing font-extrabold">

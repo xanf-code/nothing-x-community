@@ -23,7 +23,7 @@ export default function SortDrop() {
   return (
     <div>
       <select
-        className="p-1 rounded-md"
+        className="p-1 rounded-md bg-white dark:bg-gray-900"
         onChange={handleSelectChange}
         value={searchParams.get("order") || "approved"}
       >
