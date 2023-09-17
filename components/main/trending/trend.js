@@ -7,11 +7,10 @@ import Image from "next/image";
 async function TrendComp() {
   const publishedResources = await getPublishedResources();
   return (
-    <>
+    <div>
       <div className="flex space-x-2 items-center">
-        <span>⚡️🔥</span>
-        <h2 className="tracking-wide text-lg font-nothing">
-          Trending Resources
+        <h2 className="tracking-wide text-lg font-nothing font-extrabold">
+          ⚡️🔥 Trending Resources
         </h2>
         <Image src={"/hot2x.webp"} height={11} width={30} />
       </div>
@@ -19,7 +18,7 @@ async function TrendComp() {
       {publishedResources.map((resource, index) => (
         <Resource key={index} resource={resource} />
       ))}
-    </>
+    </div>
   );
 }
 

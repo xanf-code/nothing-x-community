@@ -11,11 +11,19 @@ const HeaderComp = () => {
   const routes = [
     {
       href: "/",
-      label: "Home",
+      label: "🏠 Home",
     },
     {
       href: "/submit",
-      label: "Submit",
+      label: "🔖 Submit",
+    },
+    {
+      href: "/posts",
+      label: "🛠️ Blogs",
+    },
+    {
+      href: "/links",
+      label: "🔗 Links",
     },
   ];
 
@@ -43,13 +51,13 @@ const HeaderComp = () => {
               </SheetContent>
             </Sheet>
           </div>
-          <div className="sm:flex w-full items-center sm:justify-between">
+          <div className="sm:flex w-full items-center sm:justify-between cursor-cell select-none">
             <nav className="mx-6 space-x-4 lg:space-x-6 hidden md:block">
               {routes.map((route, i) => (
                 <Link
                   key={i}
                   href={route.href}
-                  className="text-sm font-nothing transition-colors"
+                  className="text-sm font-nothing transition-colors cursor-cell select-none"
                 >
                   {route.label}
                 </Link>

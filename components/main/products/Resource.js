@@ -11,8 +11,6 @@ import {
   ClockIcon,
   EyeOpenIcon,
 } from "@radix-ui/react-icons";
-import wretch from "wretch";
-import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { SelectSeparator } from "@/components/ui/select";
 

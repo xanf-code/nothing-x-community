@@ -18,6 +18,7 @@ export const resourceTypes = {
   WALLPAPERS: "WALLPAPERS",
   ROMS: "CUSTOM ROMS",
   ACCESSORIES: "ACCESSORIES",
+  GLYPH: "GLYPH",
 };
 
 export const MAX_FILE_SIZE = 10485760;

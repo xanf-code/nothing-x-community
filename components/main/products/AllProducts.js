@@ -42,7 +42,9 @@ async function AllProducts({ pkey }) {
     <div className="mt-4">
       <div className="flex justify-between items-center">
         <div className="flex space-x-2 items-center">
-          <h2 className="tracking-wide text-lg font-nothing">{title}</h2>
+          <h2 className="tracking-wide text-lg font-nothing font-extrabold">
+            {title}
+          </h2>
         </div>
         <Link
           href={{

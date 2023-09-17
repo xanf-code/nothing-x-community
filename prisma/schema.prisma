@@ -31,9 +31,8 @@ model resource_entries {
   resourceType String
   approved     DateTime? 
   upVotes      Int       @default(0)
-  downVotes    Int       @default(0)
   clicks       Int       @default(0)
-  score        Int       @default(0)
+  score        Int   @default(0)
   status       String    @default("DRAFT")
   resource_type resource_type @relation(fields: [resourceType], references: [name])
   nothing_products nothing_products @relation(fields: [productName], references: [productName])

@@ -38,6 +38,8 @@ export default function ResourceDrop() {
       return "🖥️ Custom Roms";
     } else if (resName == "ACCESSORIES") {
       return "🪛 Accessories";
+    } else if (resName == "GLYPH") {
+      return "🚦 Glyph";
     } else {
       return resName;
     }
