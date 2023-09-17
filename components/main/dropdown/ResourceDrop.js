@@ -13,12 +13,14 @@ export default function ResourceDrop() {
     if (selectedValue === "All") {
       const currentQuery = Object.fromEntries(searchParams);
       delete currentQuery.type;
+      currentQuery.page = Number(1);
       const updatedQuery = new URLSearchParams(currentQuery).toString();
       const href = `${pathname}?${updatedQuery}`;
       router.push(href);
     } else {
       const currentQuery = Object.fromEntries(searchParams);
       currentQuery.type = selectedValue;
+      currentQuery.page = Number(1);
       const updatedQuery = new URLSearchParams(currentQuery).toString();
       const href = `${pathname}?${updatedQuery}`;
       router.push(href);

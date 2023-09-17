@@ -81,7 +81,7 @@ function Resource({ resource }) {
           </div>
           <Link target="_blank" key={resource.id} href={resource.resourceLink}>
             <p
-              className="cursor-cell leading-tight hover:underline underline-offset-2 mt-2 select-none"
+              className="cursor-cell leading-tight hover:underline underline-offset-2 mt-2 select-none text-left mr-2"
               onClick={actionClick}
             >
               {resource.resourceName}
