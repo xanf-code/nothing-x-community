@@ -4,17 +4,10 @@ import { resourceStatus, resourceTypes } from "@/utils/constants";
 import Link from "next/link";
 import { TriangleRightIcon, TriangleLeftIcon } from "@radix-ui/react-icons";
 import { Separator } from "@/components/ui/separator";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { capitalizeFirstLetter } from "@/lib/utils";
+import SortDrop from "@/components/main/dropdown/SortDrop";
+import ResourceDrop from "@/components/main/dropdown/ResourceDrop";
 
 export default async function page({ searchParams }) {
-  let placeholder;
   const page = searchParams.page ?? 1;
   const limit = searchParams.limit ?? 10;
   const product = searchParams.product ?? "Nothing Phone 1";
@@ -45,98 +38,8 @@ export default async function page({ searchParams }) {
         </div>
         <Separator className="my-2" />
         <div className="space-x-4 justify-between flex my-6">
-          <Select>
-            <SelectTrigger className="w-[180px] shadow-none font-nothing">
-              <SelectValue
-                placeholder={
-                  resourceType.includes("WALLPAPERS")
-                    ? "📱 Wallpapers"
-                    : resourceType.includes("GUIDE")
-                    ? "📖 Guides"
-                    : resourceType.includes("RANDOM")
-                    ? "🪄 Random"
-                    : resourceType.includes("CUSTOM ROMS")
-                    ? "🖥️ Custom Roms"
-                    : resourceType.includes("ACCESSORIES")
-                    ? "🪛 Accessories"
-                    : "🔥 All"
-                }
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {Object.keys(resourceTypes).map((resourceKey) => (
-                  <Link
-                    className="flex flex-col"
-                    key={resourceKey}
-                    href={{
-                      pathname: "/resource",
-                      query: {
-                        product: product,
-                        page: page,
-                        ...(query ? { q: query } : {}),
-                        type: resourceTypes[resourceKey],
-                      },
-                    }}
-                  >
-                    <p className="select-none cursor-cell p-2 text-sm font-nothing">
-                      {capitalizeFirstLetter(resourceTypes[resourceKey])}
-                    </p>
-                  </Link>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px] shadow-none font-nothing">
-              <SelectValue
-                placeholder={
-                  order == "approved" ? "🔥🕣 Recent" : "⚡️👀 Most Viewed"
-                }
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <Link
-                  href={{
-                    pathname: "/resource",
-                    query: {
-                      product: product,
-                      page: page,
-                      ...(query ? { q: query } : {}),
-                      ...(resourceType.length > 0
-                        ? { type: resourceType.join(",") }
-                        : {}),
-                      order: "approved",
-                    },
-                  }}
-                >
-                  <p className="select-none cursor-cell p-2 text-sm font-nothing">
-                    🔥🕣 Recent
-                  </p>
-                </Link>
-
-                <Link
-                  href={{
-                    pathname: "/resource",
-                    query: {
-                      product: product,
-                      page: 1,
-                      ...(query ? { q: query } : {}),
-                      ...(resourceType.length > 0
-                        ? { type: resourceType.join(",") }
-                        : {}),
-                      order: "clicks",
-                    },
-                  }}
-                >
-                  <p className="select-none cursor-cell p-2 text-sm font-nothing">
-                    ⚡️👀 Most Viewed
-                  </p>
-                </Link>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <ResourceDrop />
+          <SortDrop />
         </div>
         {publishedResources.map((resource, index) => (
           <Resource key={index} resource={resource} />
@@ -152,6 +55,7 @@ export default async function page({ searchParams }) {
               ...(resourceType.length > 0
                 ? { type: resourceType.join(",") }
                 : {}),
+              ...(order ? { order: order } : "approved"),
               ...(query ? { q: query } : {}),
             },
           }}
@@ -168,6 +72,7 @@ export default async function page({ searchParams }) {
               ...(resourceType.length > 0
                 ? { type: resourceType.join(",") }
                 : {}),
+              ...(order ? { order: order } : "approved"),
               ...(query ? { q: query } : {}),
             },
           }}

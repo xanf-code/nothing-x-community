@@ -1,6 +1,6 @@
 "use client";
 
-import { getLatestLikes, createClick } from "@/app/_actions";
+import { createClick, createVote } from "@/app/_actions";
 import { Badge } from "@/components/ui/badge";
 import { formatNumberToShort, timeAgo } from "@/lib/utils";
 import Avatar from "boring-avatars";
@@ -19,7 +19,6 @@ import { SelectSeparator } from "@/components/ui/select";
 function Resource({ resource }) {
   const { toast } = useToast();
   const upVotes = Number(resource.upVotes);
-  const [likes, setlikes] = useState(upVotes);
   const timestamp = new Date(resource.approved).getTime();
   const fullName = resource.firstName + " " + resource.lastName;
 
@@ -28,21 +27,23 @@ function Resource({ resource }) {
   }
 
   async function postAction(id, action) {
-    wretch(`/api/action?id=${id}&action=${action}`)
-      .post()
-      .res((response) => {
-        if (response.status === 200) {
-          toast({
-            description: "Vote submitted 👍🔥",
-          });
-          setlikes(getLatestLikes(id));
-        } else if (response.status === 401) {
-          toast({
-            description: "Something went wrong 🛑",
-            variant: "destructive",
-          });
-        }
+    const res = await createVote(id, action);
+    if (res == "OK") {
+      toast({
+        description: "Vote submitted 👍🔥",
       });
+    } else if (res == "ERROR") {
+      toast({
+        title: "Vote not submitted 🛑",
+        description: "Try again later after some time",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        description: "Server Error 🛑",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
@@ -56,7 +57,7 @@ function Resource({ resource }) {
             <ArrowUpIcon className="h-6 w-6 text-green-500" />
           </div>
           <p className="items-center flex text-sm font-nothing py-1 select-none">
-            {likes}
+            {upVotes}
           </p>
           <div
             className="cursor-pointer select-none"

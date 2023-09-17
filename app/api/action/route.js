@@ -1,20 +1,22 @@
-import { createVote } from "@/app/_actions";
-import { NextResponse } from "next/server";
+// ON HOLD FOR NOW
 
-export async function POST(req) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const resourceID = searchParams.get("id");
-    const action = searchParams.get("action");
+// import { createVote } from "@/app/_actions";
+// import { NextResponse } from "next/server";
 
-    if (action) {
-      await createVote(Number(resourceID), action);
-    } else {
-      console.log("INVALID ACTION.");
-    }
+// export async function POST(req) {
+//   try {
+//     const { searchParams } = new URL(req.url);
+//     const resourceID = searchParams.get("id");
+//     const action = searchParams.get("action");
 
-    return new NextResponse("Action Performed", { status: 200 });
-  } catch (error) {
-    return new NextResponse("Something went wrong", { status: 401 });
-  }
-}
+//     if (action) {
+//       await createVote(Number(resourceID), action);
+//     } else {
+//       console.log("INVALID ACTION.");
+//     }
+
+//     return new NextResponse("Action Performed", { status: 200 });
+//   } catch (error) {
+//     return new NextResponse("Something went wrong", { status: 401 });
+//   }
+// }

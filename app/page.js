@@ -20,7 +20,9 @@ export default function Home() {
       </div>
       <TrendComp />
       {Object.keys(products).map((productKey) => (
-        <AllProducts pkey={products[productKey]} />
+        <div>
+          <AllProducts pkey={products[productKey]} />
+        </div>
       ))}
     </div>
   );

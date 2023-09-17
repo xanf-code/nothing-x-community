@@ -4,9 +4,9 @@ import {
   addClicksToPublishedResource,
   addVoteToPublishedResource,
   getResourceByID,
-  getUpvotes,
   updateResourceScore,
 } from "@/lib/resources";
+import { revalidatePath } from "next/cache";
 
 export async function calculateTrendingScore(id) {
   const post = await getResourceByID(id);
@@ -25,20 +25,19 @@ export async function calculateTrendingScore(id) {
   await updateResourceScore(id, Math.round(score));
 }
 
-export async function getLatestLikes(resourceID) {
-  const ups = await getUpvotes(resourceID);
-  return Number(ups);
-}
-
 export async function createClick(resourceID) {
   await addClicksToPublishedResource(resourceID);
   await calculateTrendingScore(resourceID);
+  revalidatePath("/");
 }
 
 export async function createVote(resourceID, action) {
-  await addVoteToPublishedResource(resourceID, action);
-  await Promise.allSettled([
-    getLatestLikes(resourceID),
-    calculateTrendingScore(resourceID),
-  ]);
+  try {
+    await addVoteToPublishedResource(resourceID, action);
+    await calculateTrendingScore(resourceID);
+    revalidatePath("/");
+    return "OK";
+  } catch (e) {
+    return "ERROR";
+  }
 }
