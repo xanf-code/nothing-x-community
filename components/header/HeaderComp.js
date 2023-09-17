@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { MoonIcon, SunIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 
@@ -37,17 +42,19 @@ const HeaderComp = () => {
                 <HamburgerMenuIcon className="h-6 md:hidden w-6" />
               </SheetTrigger>
               <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4">
                   {routes.map((route, i) => (
-                    <Link
-                      key={i}
-                      href={route.href}
-                      className="block px-2 py-1 text-lg font-nothing"
-                    >
-                      {route.label}
-                    </Link>
+                    <SheetClose asChild>
+                      <Link
+                        key={i}
+                        href={route.href}
+                        className="block px-2 py-1 text-lg font-nothing"
+                      >
+                        {route.label}
+                      </Link>
+                    </SheetClose>
                   ))}
-                </nav>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
@@ -70,8 +77,8 @@ const HeaderComp = () => {
                 aria-label="Toggle Theme"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
-                <SunIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <MoonIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <SunIcon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <MoonIcon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <span className="sr-only">Toggle Theme</span>
               </Button>
             </div>
