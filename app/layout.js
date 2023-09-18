@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
-  title: "Nothing Resources",
-  description: "All nothing product resources at one stop.",
+  title: "Nothing Resources | One stop for all nothing resources",
+  description: "All Nothing product repository.",
 };
 
 export default function RootLayout({ children }) {

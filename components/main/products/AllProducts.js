@@ -6,6 +6,8 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 
 async function AllProducts({ pkey }) {
+  let title;
+
   const publishedResources = await getResourcesByProduct(
     pkey,
     resourceStatus.PUBLISHED,
@@ -16,7 +18,6 @@ async function AllProducts({ pkey }) {
     "approved"
   );
 
-  let title;
   switch (pkey) {
     case "Nothing Phone 1":
       title = "🔥📱 Nothing Phone (1)";
@@ -62,9 +63,24 @@ async function AllProducts({ pkey }) {
         </Link>
       </div>
       <Separator className="my-3" />
-      {publishedResources.map((resource, index) => (
-        <Resource key={index} resource={resource} />
-      ))}
+      {publishedResources && publishedResources.length > 0 ? (
+        <div>
+          {publishedResources.map((resource, index) => (
+            <Resource key={index} resource={resource} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col ml-2 space-y-1">
+          <p className="font-nothing">No resources available at this time.</p>
+          <Link
+            target="__blank"
+            href="/submit"
+            className="font-nothing text-xs hover:underline hover:underline-offset-2 text-blue-600 select-none cursor-cell"
+          >
+            click here to submit resources.
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
