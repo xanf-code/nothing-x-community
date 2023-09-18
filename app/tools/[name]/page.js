@@ -3,6 +3,14 @@ import LinkLayout from "@/components/links/LinkLayout";
 import { SelectSeparator } from "@/components/ui/select";
 import { data } from "@/data/links";
 
+export function generateMetadata({ params }) {
+  const { name } = params;
+
+  return {
+    title: `Links and Tools for ${decodeURI(name)} | Nothing Resources`,
+  };
+}
+
 export default function ToolsPage({ params }) {
   const filteredObjects = data.filter(
     (obj) => obj.tag === decodeURI(params.name)

@@ -5,6 +5,15 @@ import getPostMetadata from "@/components/posts/getPostMetadata";
 import { timeAgo } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
+export function generateMetadata({ params }) {
+  const { slug } = params;
+  const { data } = getPostContent(slug);
+
+  return {
+    title: `${data.title} | Nothing Resources`,
+  };
+}
+
 const getPostContent = (slug) => {
   const folder = "posts/";
   const file = `${folder}${slug}.md`;
