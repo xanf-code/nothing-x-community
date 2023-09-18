@@ -20,15 +20,15 @@ const HeaderComp = () => {
     },
     {
       href: "/submit",
-      label: "🔖 Submit",
+      label: "📝 Submit",
     },
     {
       href: "/posts",
-      label: "🛠️ Blogs",
+      label: "🗞️ Blogs",
     },
     {
-      href: "/links",
-      label: "🔗 Links",
+      href: "/tools",
+      label: "🛠️ Tools",
     },
   ];
 
