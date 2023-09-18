@@ -11,7 +11,8 @@ import { revalidatePath } from "next/cache";
 export async function calculateTrendingScore(id) {
   const post = await getResourceByID(id);
   const clicksWeight = 0.5;
-  const scoreWeight = 0.3;
+  // v0.1 has no scores
+  const scoreWeight = 0.0;
   const timeWeight = 0.2;
   const timeDecayHalfLife = 60 * 60 * 1000;
 
@@ -31,13 +32,13 @@ export async function createClick(resourceID) {
   revalidatePath("/");
 }
 
-export async function createVote(resourceID, action) {
-  try {
-    await addVoteToPublishedResource(resourceID, action);
-    await calculateTrendingScore(resourceID);
-    revalidatePath("/");
-    return "OK";
-  } catch (e) {
-    return "ERROR";
-  }
-}
+// export async function createVote(resourceID, action) {
+//   try {
+//     await addVoteToPublishedResource(resourceID, action);
+//     await calculateTrendingScore(resourceID);
+//     revalidatePath("/");
+//     return "OK";
+//   } catch (e) {
+//     return "ERROR";
+//   }
+// }

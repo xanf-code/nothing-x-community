@@ -11,12 +11,9 @@ import {
   ClockIcon,
   EyeOpenIcon,
 } from "@radix-ui/react-icons";
-import { useToast } from "@/components/ui/use-toast";
 import { SelectSeparator } from "@/components/ui/select";
 
 function Resource({ resource }) {
-  const { toast } = useToast();
-  const upVotes = Number(resource.upVotes);
   const timestamp = new Date(resource.approved).getTime();
   const fullName = resource.firstName + " " + resource.lastName;
 
@@ -24,47 +21,10 @@ function Resource({ resource }) {
     await createClick(resource.id);
   }
 
-  async function postAction(id, action) {
-    const res = await createVote(id, action);
-    if (res == "OK") {
-      toast({
-        description: "Vote submitted 👍🔥",
-      });
-    } else if (res == "ERROR") {
-      toast({
-        title: "Vote not submitted 🛑",
-        description: "Try again later after some time",
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        description: "Server Error 🛑",
-        variant: "destructive",
-      });
-    }
-  }
-
   return (
     <>
       <div className="flex items-center">
-        <div className="flex flex-col items-center pr-3 sm:pr-4">
-          <div
-            className="cursor-pointer select-none"
-            onClick={() => postAction(resource.id, "up")}
-          >
-            <ArrowUpIcon className="h-6 w-6 text-green-500" />
-          </div>
-          <p className="items-center flex text-sm font-nothing py-1 select-none">
-            {upVotes}
-          </p>
-          <div
-            className="cursor-pointer select-none"
-            onClick={() => postAction(resource.id, "down")}
-          >
-            <ArrowDownIcon className="h-6 w-6 rotate-0 text-red-500" />
-          </div>
-        </div>
-        <div className="space-y-3 flex-1">
+        <div className="space-y-3 flex-1 ml-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2.5">
               <Avatar size={20} name={fullName} variant="beam" square={false} />
