@@ -1,7 +1,10 @@
-"use client";
-
 import { products } from "@/utils/constants";
 import Link from "next/link";
+
+export const metadata = {
+  title: "Links and Tools | Nothing Resources",
+  description: "All nothing product resources at one stop.",
+};
 
 export default function page() {
   return (

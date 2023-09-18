@@ -7,6 +7,14 @@ import { Separator } from "@/components/ui/separator";
 import SortDrop from "@/components/main/dropdown/SortDrop";
 import ResourceDrop from "@/components/main/dropdown/ResourceDrop";
 
+export function generateMetadata({ searchParams }) {
+  const { product } = searchParams;
+
+  return {
+    title: `${product} Resources | Nothing Resources`,
+  };
+}
+
 export default async function page({ searchParams }) {
   const page = searchParams.page ?? 1;
   const limit = searchParams.limit ?? 10;
